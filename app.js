@@ -28,15 +28,18 @@ const again = document.querySelector('.again');
 number.textContent = secretNumber;
 let score = 20;
 let highScore = 0;
+
+const displayMessage = (msg) => (message.textContent = msg);
+
 checkButton.addEventListener('click', function () {
    let guessFieldValue = Number(guessField.value);
 
    if (!guessFieldValue) {
-      message.textContent = '⛔There is no Number';
+      displayMessage('⛔There is no Number');
    }
    //? When Player Wins
    else if (guessFieldValue === secretNumber) {
-      message.textContent = 'Congrats Its Matched';
+      displayMessage('Congrats Its Matched');
       document.body.style.backgroundColor = 'green';
       number.style.width = '30rem';
 
@@ -48,11 +51,11 @@ checkButton.addEventListener('click', function () {
       //? When Guess is wromng
    } else if (guessFieldValue !== secretNumber) {
       if (score > 1) {
-         message.textContent = guessFieldValue > secretNumber ? 'Number is high' : 'Number is low';
+         displayMessage(guessFieldValue > secretNumber ? 'Number is high' : 'Number is low');
          score--;
          document.querySelector('.score').textContent = score;
       } else {
-         message.textContent = 'You have loosed';
+         displayMessage('You have loosed');
          score.textContent = 0;
       }
    }
@@ -64,7 +67,7 @@ again.addEventListener('click', function () {
    score = 20;
    guessField.value = 0;
    document.body.style.backgroundColor = '#222';
-   message.textContent = 'Start guessing...';
+   displayMessage('Start guessing...');
    number.textContent = '?';
    number.style.width = '15rem';
    document.querySelector('.score').textContent = score;
