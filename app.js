@@ -25,7 +25,7 @@ const guessField = document.querySelector('.guess');
 const message = document.querySelector('.message');
 const number = document.querySelector('.number');
 const again = document.querySelector('.again');
-
+number.textContent = secretNumber;
 let score = 20;
 let highScore = 0;
 checkButton.addEventListener('click', function () {
@@ -36,7 +36,6 @@ checkButton.addEventListener('click', function () {
    }
    //? When Player Wins
    else if (guessFieldValue === secretNumber) {
-      number.textContent = secretNumber;
       message.textContent = 'Congrats Its Matched';
       document.body.style.backgroundColor = 'green';
       number.style.width = '30rem';
@@ -46,26 +45,15 @@ checkButton.addEventListener('click', function () {
          highScore = score;
          document.querySelector('.highscore').textContent = highScore;
       }
-   } //? When guessFieldValue is Higher
-   else if (guessFieldValue > secretNumber) {
+      //? When Guess is wromng
+   } else if (guessFieldValue !== secretNumber) {
       if (score > 1) {
+         message.textContent = guessFieldValue > secretNumber ? 'Number is high' : 'Number is low';
          score--;
          document.querySelector('.score').textContent = score;
-         message.textContent = 'The Number is High';
       } else {
          message.textContent = 'You have loosed';
          score.textContent = 0;
-      }
-   }
-   //? When guessFieldValue is lower
-   else if (guessFieldValue < secretNumber) {
-      if (score > 1) {
-         score--;
-         document.querySelector('.score').textContent = score;
-         message.textContent = 'The Number is Low';
-      } else {
-         message.textContent = 'You have loosed';
-         document.querySelector('.score').textContent = 0;
       }
    }
 });
